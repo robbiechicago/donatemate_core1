@@ -90,8 +90,7 @@ class OrgController extends Controller
     {
         $org = Org::with(['users', 'donations', 'devices.org'])->find($id);
 
-        $base_url = env('APP_URL');
-        return $base_url;
+        $base_url = \Config::get('values.app_url');
 
         return view('org.show')->with([
             'org' => $org,
