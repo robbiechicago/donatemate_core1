@@ -47,6 +47,11 @@ class DeviceController extends Controller
             ],
             'description' => [
                 'nullable'
+            ],
+            'suggested_donation' => [
+                'nullable',
+                'numeric',
+                'min:1'
             ]
         ]);
 
@@ -58,6 +63,7 @@ class DeviceController extends Controller
         $device->type = 1;
         $device->name = $request->name;
         $device->description = $request->description;
+        $device->suggested_donation = $request->suggested_donation;
         $device->created_by = $user->id;
 
         if ($device->save()) {

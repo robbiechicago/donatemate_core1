@@ -6,6 +6,7 @@ use App\Org;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Env;
 use Illuminate\View\View;
 use Illuminate\Validation\Rule;
 use PhpParser\Node\Expr\Cast\Object_;
@@ -21,7 +22,7 @@ class OrgController extends Controller
      */
     public function index()
     {
-        $orgs = Org::orderBy('display_name')->get();
+        $orgs = Org::where('active', 1)->orderBy('display_name')->get();
 
         return view('org.index')->with([
             'orgs' => $orgs
@@ -89,21 +90,11 @@ class OrgController extends Controller
     {
         $org = Org::with(['users', 'donations', 'devices.org'])->find($id);
 
-        if ($org) {
-            foreach ($org->devices as $device) {
-                $newDevice = (object)[];
-                $newDevice->url = 'www.some.url';
-                $newDevice->device_hash = $device->device_hash;
-                $newDevice->org_hash = $device->org->org_hash;
-                $newDevice->org_name = $device->org->display_name;
-                $device->json_object = json_encode($newDevice);
-            }
-        }
-
-//        return $org;
+        $base_url = env('APP_URL');
 
         return view('org.show')->with([
-            'org' => $org
+            'org' => $org,
+            'base_url' => $base_url,
         ]);
     }
 

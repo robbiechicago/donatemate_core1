@@ -46,6 +46,18 @@
                             value="{{ $device && $device->description ? $device->description : '' }}"
                         >
                     </div>
+                    <div class="form-group">
+                        <label for="suggested_donation">Suggested Donation</label>
+                        <input
+                            type="number"
+                            step="0.5"
+                            min="1"
+                            id="suggested_donation"
+                            name="suggested_donation"
+                            class="form-control"
+                            value="{{ $device && $device->suggested_donation ? $device->suggested_donation : '' }}"
+                        >
+                    </div>
 
                     <button type="submit" class="btn btn-primary mt-3">Submit</button>
                 </form>

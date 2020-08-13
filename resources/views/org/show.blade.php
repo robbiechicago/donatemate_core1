@@ -103,14 +103,18 @@
                         </div>
 
                         @foreach($org->devices as $device)
+                            @php
+                              $qr = $base_url . '/pledge?org_hash=' . $org->org_hash . '&device_hash=' . $device->device_hash . '&org_name=' . rawurlencode($org->display_name) . '&donation=' . $device->suggested_donation;
+                            @endphp
                         <div class="row mb-3">
                             <div class="col-md-auto">
-                                {!! QrCode::size(200)->margin(5)->errorCorrection('Q')->generate($device->json_object); !!}
+                                {!! QrCode::size(200)->margin(5)->errorCorrection('L')->generate($qr); !!}
                             </div>
                             <div class="col">
                                 <div>Name: {{ $device->name }}</div>
                                 <div>Description: {{ $device->description }}</div>
                                 <div>Suggested Donation: {{ $device->suggested_donation ? $device->suggested_donation : 0 }}</div>
+                                <div>QR content: {{ $qr }}</div>
                             </div>
                         </div>
                         @endforeach

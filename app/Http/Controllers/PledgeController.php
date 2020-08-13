@@ -16,6 +16,7 @@ class PledgeController extends Controller
      */
     public function pledge_landing()
     {
+
         if (!isset($_GET['org_hash']) || !isset($_GET['device_hash'])) {
             return 'bum';
         }
