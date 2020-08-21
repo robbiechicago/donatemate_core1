@@ -18,7 +18,7 @@ class BalanceController extends Controller
         $totalDonations = Donation::where('user_id', $user->id)->sum('amount');
 
         return response()->json([
-            'success' => true,
+            'success' => 'true',
             'message' => 'FOUND',
             'data' => [
                 'balance' => $totalDeposits - $totalDonations

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AppUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AppUserAuthController extends Controller
 {
@@ -17,12 +18,24 @@ class AppUserAuthController extends Controller
      */
     public function register(Request $request) {
 
-        $request->validate([
+        $validation_array = [
             'first_name' => 'required|string',
             'last_name' => 'required|string',
             'email' => 'required|string|email|unique:app_users',
-            'password' => 'required|string'
-        ]);
+            'password' => 'required|string|confirmed'
+        ];
+
+        $validator = Validator::make($request->all(), $validation_array);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => 'false',
+                'message' => 'INVALID REQUEST',
+                'data' => [
+                    'errors' => $validator->errors()
+                ]
+            ], 200);
+        }
 
         $user = new AppUser();
         $user->first_name = $request->first_name;
@@ -32,7 +45,8 @@ class AppUserAuthController extends Controller
         $user->save();
 
         return response()->json([
-            'message' => 'Successfully created user!'
+            'success' => 'true',
+            'message' => 'USER CREATED'
         ], 201);
 
     }

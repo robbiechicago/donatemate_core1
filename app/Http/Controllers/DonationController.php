@@ -22,17 +22,18 @@ class DonationController extends Controller
         $donation->org_id = $request->org_id;
         $donation->user_id = $user->id;
         $donation->amount = $request->amount;
+        $donation->is_suggested_donation = $request->is_suggested_donation;
         $donation->status = 'pending';
 
         if (!$donation->save()) {
             return response()->json([
-                'success' => false,
+                'success' => 'false',
                 'message' => 'DONATION_FAILED'
             ], 200);
         }
 
         return response()->json([
-            'success' => true,
+            'success' => 'true',
             'message' => 'DONATION_RECIEVED'
         ], 200);
     }

@@ -56,6 +56,7 @@
                                 <th>Donation ID</th>
                                 <th>Donor ID</th>
                                 <th>Amount</th>
+                                <th>Suggested Donation?</th>
                                 <th>Status</th>
                                 <th>Date</th>
                                 <th>Device</th>
@@ -70,6 +71,7 @@
                                         <td>{{ $donation->id }}</td>
                                         <td>{{ $donation->user_id }}</td>
                                         <td>{{ $donation->amount }}</td>
+                                        <td>{{ $donation->is_suggested_donation ? 'Yes' : 'No' }}</td>
                                         <td>{{ $donation->status }}</td>
                                         <td>{{ $donation->created_at }}</td>
                                         <td>to be sorted</td>

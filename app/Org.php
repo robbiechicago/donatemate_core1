@@ -13,7 +13,7 @@ class Org extends Model
 
     public function donations()
     {
-        return $this->hasMany('App\Donation', 'org_id');
+        return $this->hasMany('App\Donation', 'org_id')->orderBy('id', 'DESC');
     }
 
     public function devices()

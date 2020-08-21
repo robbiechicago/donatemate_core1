@@ -86,8 +86,8 @@ class DeviceController extends Controller
 
         if (!$device) {
             return response()->json([
-                'success' => false,
-                'message' => 'DONATION_FAILED'
+                'success' => 'false',
+                'message' => 'DEVICE NOT FOUND'
             ], 200);
         }
 
@@ -104,7 +104,7 @@ class DeviceController extends Controller
         ];
 
         return response()->json([
-            'success' => true,
+            'success' => 'true',
             'message' => 'FOUND',
             'data' => [
                 'device' => $return_device
