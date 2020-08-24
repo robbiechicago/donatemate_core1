@@ -22,7 +22,7 @@ class AppUserAuthController extends Controller
             'first_name' => 'required|string',
             'last_name' => 'required|string',
             'email' => 'required|string|email|unique:app_users',
-            'password' => 'required|string|confirmed'
+            'password' => 'required|string|min:8|confirmed'
         ];
 
         $validator = Validator::make($request->all(), $validation_array);
